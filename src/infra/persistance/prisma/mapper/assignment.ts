@@ -10,6 +10,7 @@ export class ApprovalAssignmentMapper {
       assignment.expenseId,
       assignment.approverId,
       new AssignmentStatus(assignment.status),
+      nullableToUndefined(assignment.nextApproverId),
       nullableToUndefined(assignment.reason),
       assignment.createdAt,
     );
@@ -25,6 +26,7 @@ export class ApprovalAssignmentMapper {
           assignment.expenseId,
           assignment.approverId,
           new AssignmentStatus(assignment.status),
+          nullableToUndefined(assignment.nextApproverId),
           nullableToUndefined(assignment.reason),
           assignment.createdAt,
         ),

@@ -17,6 +17,7 @@ export class PrismaApprovalAssignmentRepository
         reason: params.reason,
         approverId: params.approverId,
         status: params.status as AssignmentStatus,
+        nextApproverId: params.nextApproverId,
       },
     });
 

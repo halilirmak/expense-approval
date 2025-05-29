@@ -3,8 +3,10 @@ import { Expense } from "./entities/Expense";
 import { User } from "./entities/User";
 
 export type CreateExpense = {
+  id?: string;
   amount: string;
   submitterId: string;
+  status?: string;
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -13,6 +15,7 @@ export type CreateApprovalAssignment = {
   expenseId: string;
   reason?: string;
   approverId: string;
+  nextApproverId?: string;
   status: string;
   createdAt?: Date;
 };

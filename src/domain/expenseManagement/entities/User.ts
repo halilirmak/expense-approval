@@ -1,7 +1,9 @@
+import { Email } from "../../../domain/valueObjects";
+
 export class User {
   constructor(
     private id: string,
-    private email: string,
+    private email: Email,
     private managerId?: string,
   ) {}
 
@@ -18,13 +20,13 @@ export class User {
   }
 
   getEmail() {
-    return this.email;
+    return this.email.toValue();
   }
 
   toJSON() {
     return {
       id: this.id,
-      email: this.email,
+      email: this.email.toValue(),
       managerId: this.managerId,
     };
   }

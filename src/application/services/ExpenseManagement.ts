@@ -67,12 +67,23 @@ export class ExpenseManagementService implements IExpenseManagementService {
     };
   }
 
+  // Automatically approves first assignment from the user who created
   async createExpense(command: CreateExpenseCommand): Promise<{ id: string }> {
-    const expense = await this.expenseRepository.create({
-      amount: command.amount,
-      submitterId: command.submitterId,
+    const user = await this.userRepository.getUser(command.submitterId);
+    const result = this.usecase.createExpense({
+      user,
+      expense: {
+        amount: command.amount,
+        submitterId: command.submitterId,
+      },
     });
 
+    console.log(result.expense.toJSON());
+    const expense = await this.expenseRepository.create(
+      result.expense.toJSON(),
+    );
+
+    await this.approvalAssignmentRepository.create(result.assignment.toJSON());
     return { id: expense.getId() };
   }
 }

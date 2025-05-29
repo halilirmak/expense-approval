@@ -7,6 +7,7 @@ export class ApprovalAssignment {
     private expenseId: string,
     private approverId: string,
     private status: AssignmentStatus,
+    private nextApproverId?: string,
     private reason?: string,
     private createdAt?: Date,
   ) {}
@@ -32,6 +33,9 @@ export class ApprovalAssignment {
   getApproverId() {
     return this.approverId;
   }
+  getNextApproverId() {
+    return this.nextApproverId;
+  }
 
   getId() {
     return this.id;
@@ -46,6 +50,7 @@ export class ApprovalAssignment {
       id: this.id,
       expenseId: this.expenseId,
       approverId: this.approverId,
+      nextApproverId: this.nextApproverId,
       status: this.status.toValue(),
       reason: this.reason,
       createdAt: this.createdAt,

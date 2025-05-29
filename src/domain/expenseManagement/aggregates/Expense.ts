@@ -24,6 +24,7 @@ export class ExpenseAggregate {
       this.expense.getId(),
       this.user.getUserId(),
       status,
+      this.nextApprover(),
     );
 
     assignment.approve(status, this.user.getUserId(), reason);
@@ -34,6 +35,11 @@ export class ExpenseAggregate {
 
   nextApprover() {
     return this.user.getManagerId();
+  }
+
+  canUserApprove() {
+    console.log(this.assignments[0].getNextApproverId(), this.user.getUserId());
+    return this.assignments[0].getNextApproverId() === this.user.getUserId();
   }
 
   approveExpense() {

@@ -19,8 +19,10 @@ export class PrismaExpenseRepository implements IExpenseRepository {
   async create(params: CreateExpense): Promise<Expense> {
     const expense = await this.db.expense.create({
       data: {
+        id: params.id,
         amount: params.amount,
         submitterId: params.submitterId,
+        status: params.status as ExpenseStatus,
       },
     });
 
@@ -44,7 +46,9 @@ export class PrismaExpenseRepository implements IExpenseRepository {
     const data = await this.db.expense.findUnique({
       where: { id },
       include: {
-        assignments: true,
+        assignments: {
+          orderBy: { createdAt: "desc" },
+        },
       },
     });
 
