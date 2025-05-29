@@ -1,19 +1,23 @@
-import { IExpenseManagementUsecase } from "../../domain/expenseManagement/usecase.js";
-import { INotificationAPI } from "../../infra/notify/Email.js";
+import { IExpenseManagementUsecase } from "../../domain/expenseManagement/usecase";
+import { INotificationAPI } from "../../infra/notify/Email";
 
 import {
-  ApproveAssignment,
+  ApproveAssignmentCommand,
   ApproveAssignmentResponse,
-} from "../commands/expenseManagement.js";
+  CreateExpenseCommand,
+} from "../commands/expenseManagement";
 
 import {
   IUserRepository,
   IExpenseRepository,
   IApprovalAssignmentRepository,
-} from "../../domain/expenseManagement/repository.js";
+} from "../../domain/expenseManagement/repository";
 
 export interface IExpenseManagementService {
-  approve(command: ApproveAssignment): Promise<ApproveAssignmentResponse>;
+  approve(
+    command: ApproveAssignmentCommand,
+  ): Promise<ApproveAssignmentResponse>;
+  createExpense(command: CreateExpenseCommand): Promise<{ id: string }>;
 }
 
 export class ExpenseManagementService implements IExpenseManagementService {
@@ -26,7 +30,7 @@ export class ExpenseManagementService implements IExpenseManagementService {
   ) {}
 
   async approve(
-    command: ApproveAssignment,
+    command: ApproveAssignmentCommand,
   ): Promise<ApproveAssignmentResponse> {
     const user = await this.userRepository.getUser(command.userId);
     const { expense, assignments } = await this.expenseRepository.getExpense(
@@ -61,5 +65,14 @@ export class ExpenseManagementService implements IExpenseManagementService {
       assignment: approval.assignment.toJSON(),
       nextApprover: approval.nextApprover,
     };
+  }
+
+  async createExpense(command: CreateExpenseCommand): Promise<{ id: string }> {
+    const expense = await this.expenseRepository.create({
+      amount: command.amount,
+      submitterId: command.submitterId,
+    });
+
+    return { id: expense.getId() };
   }
 }

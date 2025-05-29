@@ -1,4 +1,4 @@
-export interface ApproveAssignment {
+export interface ApproveAssignmentCommand {
   expenseId: string;
   userId: string;
   approval: string;
@@ -24,4 +24,9 @@ export interface ApproveAssignmentResponse {
   };
 
   nextApprover?: string;
+}
+
+export interface CreateExpenseCommand {
+  amount: string;
+  submitterId: string;
 }

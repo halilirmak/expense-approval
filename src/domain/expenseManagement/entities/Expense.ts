@@ -4,7 +4,7 @@ export class Expense {
   constructor(
     private id: string,
     private amount: Money,
-    private status: ExpenseStatus,
+    private status: ExpenseStatus = new ExpenseStatus("pending"),
     private submitterId: string,
     private createdAt?: Date,
     private updatedAt?: Date,

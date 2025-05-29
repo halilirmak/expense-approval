@@ -20,7 +20,6 @@ export class PrismaExpenseRepository implements IExpenseRepository {
     const expense = await this.db.expense.create({
       data: {
         amount: params.amount,
-        status: params.status as ExpenseStatus,
         submitterId: params.submitterId,
       },
     });

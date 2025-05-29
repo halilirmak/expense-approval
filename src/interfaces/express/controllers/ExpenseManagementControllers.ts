@@ -1,13 +1,10 @@
 import { Request, Response } from "express";
 import { IExpenseManagementService } from "../../../application/services/ExpenseManagement";
-import { ApproveAssignmentSchema } from "./ExpensManagementSchemas";
+import {
+  ApproveAssignmentSchema,
+  CreateExpenseSchema,
+} from "./ExpensManagement.schema";
 
-export interface ApproveAssignment {
-  expenseId: string;
-  userId: string;
-  approval: string;
-  reason?: string;
-}
 export class ExpenseManagementController {
   constructor(private service: IExpenseManagementService) {}
 
@@ -21,6 +18,16 @@ export class ExpenseManagementController {
       reason: req.body.reason,
     });
 
+    res.json(response).status(200);
+  }
+
+  public createExpenseSchema = CreateExpenseSchema;
+
+  async createExpense(req: Request, res: Response): Promise<void> {
+    const response = await this.service.createExpense({
+      amount: req.body.amount,
+      submitterId: req.body.submitterId,
+    });
     res.json(response).status(201);
   }
 }

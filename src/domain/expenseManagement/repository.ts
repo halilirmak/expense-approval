@@ -4,7 +4,6 @@ import { User } from "./entities/User";
 
 export type CreateExpense = {
   amount: string;
-  status: string;
   submitterId: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -18,6 +17,11 @@ export type CreateApprovalAssignment = {
   createdAt?: Date;
 };
 
+export type CreateUser = {
+  email: string;
+  managerId?: string;
+};
+
 export interface IExpenseRepository {
   create(params: CreateExpense): Promise<Expense>;
   updateExpenseStatus(id: string, status: string): Promise<void>;
@@ -28,6 +32,7 @@ export interface IExpenseRepository {
 
 export interface IUserRepository {
   getUser(id: string): Promise<User>;
+  createUser(params: CreateUser): Promise<User>;
 }
 
 export interface IApprovalAssignmentRepository {
