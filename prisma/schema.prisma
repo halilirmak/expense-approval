@@ -1,0 +1,52 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("APP_DATABASE_URL")
+}
+
+model User {
+  id                  String               @id @default(uuid())
+  email               String
+  manager             User?                @relation("Manager", fields: [managerId], references: [id])
+  managerId           String?
+  submittedExpenses   Expense[]            @relation("Submitter")
+  approvalAssignments ApprovalAssignment[]
+  managers            User[]               @relation("Manager")
+}
+
+model Expense {
+  id          String               @id @default(uuid())
+  amount      String
+  status      ExpenseStatus        @default(PENDING)
+  submitter   User                 @relation("Submitter", fields: [submitterId], references: [id])
+  submitterId String
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @default(now())
+  assignments ApprovalAssignment[]
+}
+
+model ApprovalAssignment {
+  id         String           @id @default(uuid())
+  expense    Expense          @relation(fields: [expenseId], references: [id])
+  expenseId  String
+  approver   User             @relation(fields: [approverId], references: [id])
+  approverId String
+  status     AssignmentStatus
+  createdAt  DateTime         @default(now())
+  reason     String?
+}
+
+enum ExpenseStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AssignmentStatus {
+  APPROVED
+  REJECTED
+}
