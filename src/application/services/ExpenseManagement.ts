@@ -78,7 +78,6 @@ export class ExpenseManagementService implements IExpenseManagementService {
       },
     });
 
-    console.log(result.expense.toJSON());
     const expense = await this.expenseRepository.create(
       result.expense.toJSON(),
     );
