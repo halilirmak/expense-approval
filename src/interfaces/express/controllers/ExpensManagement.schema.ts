@@ -2,10 +2,12 @@ import { z } from "zod";
 
 export const ApproveAssignmentSchema = z.object({
   body: z.object({
-    expenseId: z.string().uuid(),
-    approval: z.enum(["approved", "rejected"]),
+    approval: z.enum(["APPROVED", "REJECTED"]),
     reason: z.string().optional(),
     userId: z.string().uuid(),
+  }),
+  params: z.object({
+    id: z.string().uuid(),
   }),
 });
 
@@ -17,6 +19,6 @@ export interface CreateExpenseCommand {
 export const CreateExpenseSchema = z.object({
   body: z.object({
     amount: z.string(),
-    submittedId: z.string().uuid(),
+    submitterId: z.string().uuid(),
   }),
 });

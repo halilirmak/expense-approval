@@ -5,7 +5,7 @@ export interface IUserService {
   create(command: CreateUserCommand): Promise<{ id: string }>;
 }
 
-export class ExpenseManagementService implements IUserService {
+export class UserService implements IUserService {
   constructor(private userRepository: IUserRepository) {}
 
   async create(command: CreateUserCommand): Promise<{ id: string }> {

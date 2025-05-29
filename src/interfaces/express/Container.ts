@@ -12,6 +12,7 @@ import { ApiRouter } from "./router/api";
 import { ExpenseManagementController } from "./controllers/ExpenseManagementControllers";
 import { UserController } from "./controllers/UserController";
 import { ExpenseManagementService } from "../../application/services/ExpenseManagement";
+import { UserService } from "../../application/services/User";
 import { ExpenseManagementUsecase } from "../../domain/expenseManagement/usecase";
 import { EmailNotification } from "../../infra/notify/Email";
 import { Logger } from "../../infra/logger/";
@@ -38,7 +39,6 @@ export class Container {
   public register(): void {
     this.container
       .register({
-        //core components
         config: asValue(config),
         logger: asClass(Logger).singleton(),
         server: asClass(Server).singleton(),
@@ -51,15 +51,17 @@ export class Container {
       })
       .register({
         usecase: asClass(ExpenseManagementUsecase).singleton(),
-        expenseController: asClass(ExpenseManagementController).singleton(),
-        userController: asClass(UserController).singleton(),
         notificationService: asClass(EmailNotification).singleton(),
-        service: asClass(ExpenseManagementService).singleton(),
+        expenseService: asClass(ExpenseManagementService).singleton(),
+        userService: asClass(UserService).singleton(),
         userRepository: asClass(PrismaUserRepository).singleton(),
         expenseRepository: asClass(PrismaExpenseRepository).singleton(),
         approvalAssignmentRepository: asClass(
           PrismaApprovalAssignmentRepository,
         ).singleton(),
+
+        expenseController: asClass(ExpenseManagementController).singleton(),
+        userController: asClass(UserController).singleton(),
       });
   }
 

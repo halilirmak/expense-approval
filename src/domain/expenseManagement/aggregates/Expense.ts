@@ -23,6 +23,7 @@ export class ExpenseAggregate {
       uuid(),
       this.expense.getId(),
       this.user.getUserId(),
+      status,
     );
 
     assignment.approve(status, this.user.getUserId(), reason);

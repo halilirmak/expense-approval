@@ -4,18 +4,18 @@ export class Expense {
   constructor(
     private id: string,
     private amount: Money,
-    private status: ExpenseStatus = new ExpenseStatus("pending"),
+    private status: ExpenseStatus = new ExpenseStatus("PENDING"),
     private submitterId: string,
     private createdAt?: Date,
     private updatedAt?: Date,
   ) {}
 
   approve() {
-    this.status = new ExpenseStatus("approved");
+    this.status = new ExpenseStatus("APPROVED");
   }
 
   reject() {
-    this.status = new ExpenseStatus("rejected");
+    this.status = new ExpenseStatus("REJECTED");
   }
 
   getStatus() {

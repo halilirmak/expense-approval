@@ -1,12 +1,12 @@
 import { ProblemDetails } from "../../common/problemDetails";
 
-type Status = "approved" | "rejected";
+type Status = "APPROVED" | "REJECTED";
 
 export class AssignmentStatus {
   private readonly status: Status;
 
   constructor(value: string) {
-    if (!["approved", "rejected"].includes(value)) {
+    if (!["APPROVED", "REJECTED"].includes(value)) {
       throw ProblemDetails.invalidInputError(
         `Invalid status value for assignment: (${value})`,
       );
@@ -15,11 +15,11 @@ export class AssignmentStatus {
   }
 
   isApproved() {
-    return this.status === "approved";
+    return this.status === "APPROVED";
   }
 
   isRejected() {
-    return this.status === "rejected";
+    return this.status === "REJECTED";
   }
 
   toValue() {

@@ -6,13 +6,13 @@ import {
 } from "./ExpensManagement.schema";
 
 export class ExpenseManagementController {
-  constructor(private service: IExpenseManagementService) {}
+  constructor(private expenseService: IExpenseManagementService) {}
 
   public approveAssigmentSchema = ApproveAssignmentSchema;
 
   async approveExpense(req: Request, res: Response): Promise<void> {
-    const response = await this.service.approve({
-      expenseId: req.body.expenseId,
+    const response = await this.expenseService.approve({
+      expenseId: req.params.id,
       userId: req.body.userId,
       approval: req.body.approval,
       reason: req.body.reason,
@@ -24,7 +24,7 @@ export class ExpenseManagementController {
   public createExpenseSchema = CreateExpenseSchema;
 
   async createExpense(req: Request, res: Response): Promise<void> {
-    const response = await this.service.createExpense({
+    const response = await this.expenseService.createExpense({
       amount: req.body.amount,
       submitterId: req.body.submitterId,
     });

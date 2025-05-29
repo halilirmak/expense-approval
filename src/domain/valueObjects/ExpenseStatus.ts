@@ -1,12 +1,12 @@
 import { ProblemDetails } from "../../common/problemDetails";
 
-type Status = "pending" | "approved" | "rejected";
+type Status = "PENDING" | "APPROVED" | "REJECTED";
 
 export class ExpenseStatus {
   private readonly status: Status;
 
   constructor(value: string) {
-    if (!["pending", "approved", "rejected"].includes(value)) {
+    if (!["PENDING", "APPROVED", "REJECTED"].includes(value)) {
       throw ProblemDetails.invalidInputError(
         `Invalid status value for expense: (${value})`,
       );
@@ -15,15 +15,15 @@ export class ExpenseStatus {
   }
 
   isPending() {
-    return this.status === "pending";
+    return this.status === "PENDING";
   }
 
   isApproved() {
-    return this.status === "approved";
+    return this.status === "APPROVED";
   }
 
   isRejected() {
-    return this.status === "rejected";
+    return this.status === "REJECTED";
   }
 
   toValue() {
