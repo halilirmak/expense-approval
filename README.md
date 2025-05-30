@@ -119,21 +119,19 @@ Unit tests and integration tests are implemented as much as possible having the 
 npm run test
 ```
 
-### Running unit tests
-
-To run all tests:
+### Running all tests
 
 ```
 npm run test
 ```
 
-To run unit tests:
+### Running unit tests
 
 ```
 npm run test:unit
 ```
 
-To run integration tests:
+### Running integration tests
 
 ```
 npm run test:integ
