@@ -82,7 +82,6 @@ describe("ExpenseManagementService", () => {
         assignments: [],
         user,
         approval: "approved",
-        reason: "Looks good",
       });
       expect(approvalAssignmentRepository.create).toHaveBeenCalledWith(
         assignment.toJSON(),
@@ -145,9 +144,7 @@ describe("ExpenseManagementService", () => {
         submitterId: "user-10",
       };
 
-      const user = {
-        /* user domain object */
-      };
+      const user = {};
       const expense = {
         toJSON: () => ({ id: "expense-10" }),
         getId: () => "expense-10",
