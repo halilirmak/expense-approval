@@ -5,12 +5,15 @@
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "test": "vitest"
+    "test:unit": "vitest run --project unit",
+    "test:integ": "vitest run --project integration",
+    "test": "vitest run"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@testcontainers/postgresql": "^11.0.0",
     "@types/compression": "^1.8.0",
     "@types/express": "^5.0.2",
     "@types/morgan": "^1.9.9",

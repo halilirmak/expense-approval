@@ -109,7 +109,7 @@ Response:
 
 ## Running Tests
 
-Unit tests have been implemented, but integration tests are not included due to time constraints. For integration testing, the Testcontainers package is recommended.
+Unit tests and integration tests are implemented as much as possible having the time limit in mind. As test runner i have used vitest also i have used testcontainers to implement integration tests.
 
 - <https://testcontainers.com/?language=nodejs>
 
@@ -117,6 +117,26 @@ Unit tests have been implemented, but integration tests are not included due to 
 
 ```
 npm run test
+```
+
+### Running unit tests
+
+To run all tests:
+
+```
+npm run test
+```
+
+To run unit tests:
+
+```
+npm run test:unit
+```
+
+To run integration tests:
+
+```
+npm run test:integ
 ```
 
 ## Project Structure
