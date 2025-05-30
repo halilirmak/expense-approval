@@ -1,15 +1,15 @@
 import { describe, it, expect } from "vitest";
-import { Money } from "./Money";
+import { Money } from "../Money";
 
 describe("Money", () => {
   it("should construct with valid amount format", () => {
     const m = new Money("123.45");
-    expect(m.toString()).toBe("123.45");
+    expect(m.toValue()).toBe("123.45");
   });
 
   it("should accept whole number with no decimals", () => {
     const m = new Money("500");
-    expect(m.toString()).toBe("500");
+    expect(m.toValue()).toBe("500");
   });
 
   it("should throw on invalid format", () => {
@@ -25,9 +25,9 @@ describe("Money", () => {
     expect(new Money("0.99").toCent()).toBe(99);
   });
 
-  it("should return string via toString", () => {
+  it("should return string via toValue", () => {
     const m = new Money("789.00");
-    expect(m.toString()).toBe("789.00");
+    expect(m.toValue()).toBe("789.00");
   });
 
   it("should format number to money string using static from()", () => {

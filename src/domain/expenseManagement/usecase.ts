@@ -47,7 +47,7 @@ export class ExpenseManagementUsecase implements IExpenseManagementUsecase {
     );
     if (!aggregate.canUserApprove()) {
       throw ProblemDetails.unAuthorisedError(
-        `user $(${params.user.getUserId()}) does not have assignment`,
+        `user (${params.user.getUserId()}) does not have assignment`,
       );
     }
     const processedAssignment = aggregate.approveAssignment(
