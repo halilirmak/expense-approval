@@ -10,17 +10,19 @@ let postgresContainer: StartedPostgreSqlContainer;
 let prismaClient: PrismaClient;
 
 beforeAll(async () => {
-  postgresContainer = await new PostgreSqlContainer("postgres:latest").start();
-
-  const host = postgresContainer.getHost();
-  const port = postgresContainer.getPort();
-  const user = postgresContainer.getUsername();
-  const password = postgresContainer.getPassword();
-  const database = postgresContainer.getDatabase();
-
-  const databaseUrl = `postgresql://${user}:${password}@${host}:${port}/${database}`;
-
   try {
+    postgresContainer = await new PostgreSqlContainer(
+      "postgres:latest",
+    ).start();
+
+    const host = postgresContainer.getHost();
+    const port = postgresContainer.getPort();
+    const user = postgresContainer.getUsername();
+    const password = postgresContainer.getPassword();
+    const database = postgresContainer.getDatabase();
+
+    const databaseUrl = `postgresql://${user}:${password}@${host}:${port}/${database}`;
+
     execSync("npx prisma migrate deploy", {
       env: { ...process.env, APP_DATABASE_URL: databaseUrl },
       stdio: "inherit",
