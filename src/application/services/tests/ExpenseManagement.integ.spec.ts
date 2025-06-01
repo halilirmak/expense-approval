@@ -72,107 +72,107 @@ beforeAll(async () => {
 });
 
 describe("CreateExpense Integration", () => {
-  // it("creates expense for unmanaged user and approves expense, shoud have 1 approved assignment", async () => {
-  //   const command: CreateExpenseCommand = {
-  //     amount: "500.00",
-  //     submitterId: unmanagedUser.getUserId(),
-  //   };
-  //
-  //   const result = await expenseManagementService.createExpense(command);
-  //
-  //   expect(result).toHaveProperty("id");
-  //   expect(typeof result.id).toBe("string");
-  //
-  //   const expense = await prismaClient.expense.findUnique({
-  //     where: { id: result.id },
-  //   });
-  //
-  //   expect(expense).not.toBeNull();
-  //   expect(expense?.status).toBe("APPROVED");
-  //
-  //   const assignment = await prismaClient.approvalAssignment.findFirst({
-  //     where: { expenseId: result.id },
-  //   });
-  //   expect(assignment?.approverId).toBe(unmanagedUser.getUserId());
-  //   expect(assignment?.status).toBe("APPROVED");
-  // });
-  //
-  // it("creates expense for managed user and expense status to be expected PENDING", async () => {
-  //   const command: CreateExpenseCommand = {
-  //     amount: "500.00",
-  //     submitterId: employee.getUserId(),
-  //   };
-  //
-  //   const result = await expenseManagementService.createExpense(command);
-  //
-  //   expect(result).toHaveProperty("id");
-  //   expect(typeof result.id).toBe("string");
-  //
-  //   const expense = await prismaClient.expense.findUnique({
-  //     where: { id: result.id },
-  //   });
-  //
-  //   expect(expense).not.toBeNull();
-  //   expect(expense?.status).toBe("PENDING");
-  // });
-  //
-  // it("should remain expense status to PENDING after midManager approval and assign next approver as manager", async () => {
-  //   const command: CreateExpenseCommand = {
-  //     amount: "500.00",
-  //     submitterId: employee.getUserId(),
-  //   };
-  //
-  //   const result = await expenseManagementService.createExpense(command);
-  //
-  //   expect(result).toHaveProperty("id");
-  //   expect(typeof result.id).toBe("string");
-  //
-  //   const expense = await prismaClient.expense.findUnique({
-  //     where: { id: result.id },
-  //   });
-  //
-  //   expect(expense).not.toBeNull();
-  //   expect(expense?.status).toBe("PENDING");
-  //   const approveCommand: ApproveAssignmentCommand = {
-  //     expenseId: result.id,
-  //     userId: midManager.getUserId(),
-  //     approval: "APPROVED",
-  //   };
-  //   const approval = await expenseManagementService.approve(approveCommand);
-  //
-  //   expect(approval.expense.status).toBe("PENDING");
-  //   expect(approval.assignment.status).toBe("APPROVED");
-  //   expect(approval.nextApprover).toBe(manager.getUserId());
-  // });
-  // it("should expense status to REJECTED after midManager rejects and no need for nextApprover", async () => {
-  //   const command: CreateExpenseCommand = {
-  //     amount: "500.00",
-  //     submitterId: employee.getUserId(),
-  //   };
-  //
-  //   const result = await expenseManagementService.createExpense(command);
-  //
-  //   expect(result).toHaveProperty("id");
-  //   expect(typeof result.id).toBe("string");
-  //
-  //   const expense = await prismaClient.expense.findUnique({
-  //     where: { id: result.id },
-  //   });
-  //
-  //   expect(expense).not.toBeNull();
-  //   expect(expense?.status).toBe("PENDING");
-  //   const approveCommand: ApproveAssignmentCommand = {
-  //     expenseId: result.id,
-  //     userId: midManager.getUserId(),
-  //     approval: "REJECTED",
-  //     reason: "unnecessery spending",
-  //   };
-  //   const approval = await expenseManagementService.approve(approveCommand);
-  //
-  //   expect(approval.expense.status).toBe("REJECTED");
-  //   expect(approval.assignment.status).toBe("REJECTED");
-  //   expect(approval.nextApprover).toBeFalsy();
-  // });
+  it("creates expense for unmanaged user and approves expense, shoud have 1 approved assignment", async () => {
+    const command: CreateExpenseCommand = {
+      amount: "500.00",
+      submitterId: unmanagedUser.getUserId(),
+    };
+
+    const result = await expenseManagementService.createExpense(command);
+
+    expect(result).toHaveProperty("id");
+    expect(typeof result.id).toBe("string");
+
+    const expense = await prismaClient.expense.findUnique({
+      where: { id: result.id },
+    });
+
+    expect(expense).not.toBeNull();
+    expect(expense?.status).toBe("APPROVED");
+
+    const assignment = await prismaClient.approvalAssignment.findFirst({
+      where: { expenseId: result.id },
+    });
+    expect(assignment?.approverId).toBe(unmanagedUser.getUserId());
+    expect(assignment?.status).toBe("APPROVED");
+  });
+
+  it("creates expense for managed user and expense status to be expected PENDING", async () => {
+    const command: CreateExpenseCommand = {
+      amount: "500.00",
+      submitterId: employee.getUserId(),
+    };
+
+    const result = await expenseManagementService.createExpense(command);
+
+    expect(result).toHaveProperty("id");
+    expect(typeof result.id).toBe("string");
+
+    const expense = await prismaClient.expense.findUnique({
+      where: { id: result.id },
+    });
+
+    expect(expense).not.toBeNull();
+    expect(expense?.status).toBe("PENDING");
+  });
+
+  it("should remain expense status to PENDING after midManager approval and assign next approver as manager", async () => {
+    const command: CreateExpenseCommand = {
+      amount: "500.00",
+      submitterId: employee.getUserId(),
+    };
+
+    const result = await expenseManagementService.createExpense(command);
+
+    expect(result).toHaveProperty("id");
+    expect(typeof result.id).toBe("string");
+
+    const expense = await prismaClient.expense.findUnique({
+      where: { id: result.id },
+    });
+
+    expect(expense).not.toBeNull();
+    expect(expense?.status).toBe("PENDING");
+    const approveCommand: ApproveAssignmentCommand = {
+      expenseId: result.id,
+      userId: midManager.getUserId(),
+      approval: "APPROVED",
+    };
+    const approval = await expenseManagementService.approve(approveCommand);
+
+    expect(approval.expense.status).toBe("PENDING");
+    expect(approval.assignment.status).toBe("APPROVED");
+    expect(approval.nextApprover).toBe(manager.getUserId());
+  });
+  it("should expense status to REJECTED after midManager rejects and no need for nextApprover", async () => {
+    const command: CreateExpenseCommand = {
+      amount: "500.00",
+      submitterId: employee.getUserId(),
+    };
+
+    const result = await expenseManagementService.createExpense(command);
+
+    expect(result).toHaveProperty("id");
+    expect(typeof result.id).toBe("string");
+
+    const expense = await prismaClient.expense.findUnique({
+      where: { id: result.id },
+    });
+
+    expect(expense).not.toBeNull();
+    expect(expense?.status).toBe("PENDING");
+    const approveCommand: ApproveAssignmentCommand = {
+      expenseId: result.id,
+      userId: midManager.getUserId(),
+      approval: "REJECTED",
+      reason: "unnecessery spending",
+    };
+    const approval = await expenseManagementService.approve(approveCommand);
+
+    expect(approval.expense.status).toBe("REJECTED");
+    expect(approval.assignment.status).toBe("REJECTED");
+    expect(approval.nextApprover).toBeFalsy();
+  });
 
   it("should expense status to be APPROVED after manager APPROVES and no need for nextApprover", async () => {
     const command: CreateExpenseCommand = {
