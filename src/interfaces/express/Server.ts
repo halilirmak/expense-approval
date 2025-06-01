@@ -23,7 +23,7 @@ export class Server {
       this.http = this.express.listen(this.config.PORT, () => {
         const { port } = this.http.address() as AddressInfo;
         this.logger.info(
-          `🚀 Application ${this.config.APP_NAME} running on PORT ${port}`,
+          `Application ${this.config.APP_NAME} running on PORT ${port}`,
         );
         resolve();
       });

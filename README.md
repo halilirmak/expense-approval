@@ -46,66 +46,16 @@ npm run dev
 
   ```
   make setup
-  npm run dev
+  npm run dev:express // for express
+  npm run dev:nest //for nestjs
   ```
 
 ## API Documentation
 
-Due to limited time i was not able to add swagger documentation, however here is basic documentation:
+The API documentation is available through the NestJS application, which must be running to access it. The Express version of the API does not include documentation, although the endpoints are functionally the same.
 
-```
-POST localhost:4000/user
-Body:
-{
- "email": "example@example.com",
- "managerId": uuid // this field is optional once a user created, another user can be assigned to diffrent user as managed to them, since approvals work user -> manager -> manager -> end Manager
-}
-
-Response:
-{
- "id": uuid //user id
-}
-```
-
-```
-POST localhost:4000/expense
-Body:
-{
- "amount": "200.00",
- "submitterId": uuid //user id
-}
-
-Response:
-{
- "id": uuid // returns expense id
-}
-```
-
-```
-POST  localhost:4000/expense/:expenseId
-Body:
-{
- "APPROVAL": "APPROVED|REJECTED",
- "userId": uuid // userid of the approver
-  "reason": string //required once rejected.
-}
-
-Response:
-{
- "expense": {
-  "id": "4c210dcd-7c2d-4371-890c-f4798071ad34",
-  "amount": "20",
-  "status": "APPROVED", // automatically approves once every manager approves it, or automatically rejects once someone rejects it to end the approval queue
-  "submitterId": "be8a212c-28d3-4718-8f5c-2341f204811f"
- },
- "assignment": {
-  "id": "88972d07-6435-4016-b7cf-0d3c3ca42947",
-  "expenseId": "4c210dcd-7c2d-4371-890c-f4798071ad34",
-  "approverId": "bd20d006-e322-48d4-9c3d-87d88f17e83f",
-  "status": "APPROVED"
- }
-}
-```
+Documentation can be accessed here:
+<http://localhost:4000/api>
 
 ## Running Tests
 
@@ -142,19 +92,18 @@ npm run test:integ
 ```
  .
 ├──  cmd
-│   └──  index.ts
+│   ├──  express.ts
+│   └──  nest.ts
 ├──  dist
 │   ├──  cmd
-│   └──  src
+│   ├──  src
+│   └──  test
 ├──  docker
 │   ├──  docker-compose.yaml
 │   └──  Dockerfile
 ├──  infrastructure
 │   ├──  deployment
 │   └──  modules
-├──  logs
-│   ├──  error.log
-│   └──  info.log
 ├──  prisma
 │   ├──  migrations
 │   └──  schema.prisma
@@ -165,7 +114,10 @@ npm run test:integ
 │   ├──  domain
 │   ├──  infra
 │   └──  interfaces
+├──  test
+│   └──  setupIntegration.ts
 ├──  Makefile
+├──  nest-cli.json
 ├──  nodemon.json
 ├──  package-lock.json
 ├──  package.json
@@ -192,6 +144,16 @@ from infrastructure layer and domain layer.
 ### Domain Layer
 
 Domain layer contains core business logic and business rules. This layer is independent of the external systems.
+
+## Why Both? NestJS & Express Coexistence Explained
+
+I implemented both a NestJS application and a Express application to demonstrate and validate the separation of the interface layer from the core application logic. While both implementations expose the same functionality, this dual setup serves as a clear illustration of how the application’s core services and use cases are decoupled from any specific web framework.
+
+This approach highlights:
+
+- Interface abstraction: It allows us to swap or layer different interfaces (NestJS, Express, or others) without affecting the domain logic.
+
+- Framework-agnostic architecture: Our core logic (services, use cases, and repositories) remains clean and free from framework-specific decorators or dependencies.
 
 ## Solution
 

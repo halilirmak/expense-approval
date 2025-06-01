@@ -1,0 +1,17 @@
+export const TOKENS = {
+  Config: "Config",
+  Logger: "Logger",
+  Router: "Router",
+  Db: "Db",
+  ErrorMiddleware: "ErrorMiddleware",
+  ApiRouter: "ApiRouter",
+  ExpenseUsecase: "ExpenseUsecase",
+  NotificationService: "NotificationService",
+  ExpenseService: "ExpenseService",
+  UserService: "UserService",
+  UserRepository: "UserRepository",
+  ExpenseRepository: "ExpenseRepository",
+  ApprovalAssignmentRepository: "ApprovalAssignmentRepository",
+  ExpenseController: "ExpenseController",
+  UserController: "UserController",
+};

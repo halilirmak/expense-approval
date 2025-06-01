@@ -2,5 +2,5 @@
   "watch": ["cmd", "src"],
   "ext": "ts",
   "ignore": ["dist"],
-  "exec": "ts-node ./cmd/index.ts"
+  "exec": "ts-node ./cmd/express.ts"
 }
