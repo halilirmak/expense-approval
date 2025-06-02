@@ -12,8 +12,9 @@ export class CreateUserDTO {
   @ApiProperty({
     example: "041d40e7-b398-4040-a9da-6c9cad0bda7a",
     description: "managerId of the user",
+    required: false,
   })
   @IsOptional()
   @IsString()
-  readonly managerId: string;
+  readonly managerId?: string;
 }
