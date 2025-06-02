@@ -18,3 +18,11 @@ export class CreateUserDTO {
   @IsString()
   readonly managerId?: string;
 }
+
+export class CreateUserResponseDTO {
+  @ApiProperty({
+    description: "userid",
+    example: "52be2507-31b6-44c4-8b58-fa8932c27b53",
+  })
+  readonly id: string;
+}
