@@ -37,6 +37,7 @@ export class ExpenseContoller {
     @Body()
     body: CreateExpenseDTO,
   ): Promise<CreateExpenseResponseDTO> {
+    console.log(body);
     return this.expenseService.createExpense(body);
   }
 

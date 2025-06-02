@@ -4,11 +4,13 @@ import { AppModule } from "../src/interfaces/nestjs/app.module";
 import { GlobalExceptionFilter } from "../src/interfaces/nestjs/filter/GlobalExceptionFilter";
 import { Logger } from "../src/infra/logger/";
 import { config } from "../src/config";
+import { ValidationPipe } from "@nestjs/common";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   const logger = new Logger(config);
-  app.useGlobalFilters(new GlobalExceptionFilter(logger));
 
+  app.useGlobalFilters(new GlobalExceptionFilter(logger));
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   const options = new DocumentBuilder()
     .setTitle("Expense Approval")
     .setDescription("Service to approve expenses")
