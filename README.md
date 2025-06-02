@@ -16,22 +16,6 @@ This service handles expense management approval. It includes a REST API interfa
 npm i
 ```
 
-### Configure Environment Variables
-
-```
-PORT=4000
-APP_NAME="loan-app"
-PG_HOST=localhost
-PG_USER=user
-PG_PASSWORD=password
-PG_DB_NAME=loan
-PG_PORT=5432
-APP_DATABASE_URL="postgresql://user:password@localhost:5432/loan?schema=public"
-APP_LOG_LEVEL="debug"
-```
-
-You can pass this step, since it is a test project i am sending the .env file as well
-
 ## Runing the project
 
 ```
